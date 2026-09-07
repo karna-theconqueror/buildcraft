@@ -39,6 +39,7 @@ export default function TutorialPage() {
   useEffect(() => {
     if (tutorial) {
       startTutorial(tutorial.slug);
+      document.title = `${tutorial.title} | BuildCraft`;
     }
   }, [tutorial, startTutorial]);
 

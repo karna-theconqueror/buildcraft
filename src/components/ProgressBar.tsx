@@ -1,12 +1,13 @@
 "use client";
 
 import { useProgressStore } from "@/store/progress";
+import { tutorials } from "@/data/tutorials";
 
 export default function ProgressBar() {
   const completedTutorials = useProgressStore((s) => s.completedTutorials);
   const completed = completedTutorials.length;
-  const total = 50;
-  const percentage = Math.round((completed / total) * 100);
+  const total = tutorials.length;
+  const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
     <div className="rounded-xl border border-white/10 bg-white/5 p-6">

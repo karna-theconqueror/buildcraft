@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { categories } from "@/data/categories";
-import { tutorials, searchTutorials } from "@/data/tutorials";
+import { tutorials, searchTutorials, getTutorialBySlug } from "@/data/tutorials";
 import { learningPaths } from "@/data/paths";
 import CategoryCard from "@/components/CategoryCard";
 import TutorialCard from "@/components/TutorialCard";
@@ -16,11 +16,15 @@ import {
   TrendingUp,
   Zap,
   BookOpen,
+  Play,
 } from "lucide-react";
+import { useProgressStore } from "@/store/progress";
 
 function HomePage() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search");
+  const currentTutorial = useProgressStore((s) => s.currentTutorial);
+  const continueTutorial = currentTutorial ? getTutorialBySlug(currentTutorial) : null;
 
   if (searchQuery) {
     const results = searchTutorials(searchQuery);
@@ -78,6 +82,27 @@ function HomePage() {
       <section className="mb-16">
         <ProgressBar />
       </section>
+
+      {/* Continue Learning */}
+      {continueTutorial && (
+        <section className="mb-16">
+          <Link
+            href={`/tutorial/${continueTutorial.slug}`}
+            className="group flex items-center gap-4 rounded-xl border border-orange-500/20 bg-orange-500/5 p-4 transition-all hover:border-orange-500/40 hover:bg-orange-500/10"
+          >
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500 text-white">
+              <Play className="h-5 w-5" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm text-orange-400">Continue where you left off</div>
+              <div className="font-semibold text-white group-hover:text-orange-400 transition-colors">
+                {continueTutorial.title}
+              </div>
+            </div>
+            <ArrowRight className="h-5 w-5 text-gray-400 group-hover:text-orange-400 transition-colors" />
+          </Link>
+        </section>
+      )}
 
       {/* Stats Section */}
       <section className="mb-16 grid grid-cols-2 gap-4 md:grid-cols-4">

@@ -1,14 +1,17 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { tutorials } from "@/data/tutorials";
 
 interface ProgressStore {
   completedTutorials: string[];
   startedTutorials: string[];
   currentTutorial: string | null;
   completedSteps: Record<string, number[]>;
+  bookmarkedTutorials: string[];
   startTutorial: (slug: string) => void;
   completeTutorial: (slug: string) => void;
   completeStep: (tutorialSlug: string, stepIndex: number) => void;
+  toggleBookmark: (slug: string) => void;
   getProgress: () => { completed: number; total: number; percentage: number };
 }
 
@@ -19,6 +22,7 @@ export const useProgressStore = create<ProgressStore>()(
       startedTutorials: [],
       currentTutorial: null,
       completedSteps: {},
+      bookmarkedTutorials: [],
 
       startTutorial: (slug) =>
         set((state) => ({
@@ -47,12 +51,20 @@ export const useProgressStore = create<ProgressStore>()(
           };
         }),
 
+      toggleBookmark: (slug) =>
+        set((state) => ({
+          bookmarkedTutorials: state.bookmarkedTutorials.includes(slug)
+            ? state.bookmarkedTutorials.filter((s) => s !== slug)
+            : [...state.bookmarkedTutorials, slug],
+        })),
+
       getProgress: () => {
         const state = get();
+        const total = tutorials.length;
         return {
           completed: state.completedTutorials.length,
-          total: 50,
-          percentage: Math.round((state.completedTutorials.length / 50) * 100),
+          total,
+          percentage: total > 0 ? Math.round((state.completedTutorials.length / total) * 100) : 0,
         };
       },
     }),

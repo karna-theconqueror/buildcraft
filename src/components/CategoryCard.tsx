@@ -5,6 +5,8 @@ import { CategoryInfo } from "@/types";
 import {
   Brain, Server, Database, Container, Layout,
   Gamepad2, Code2, Globe, Monitor, Shield,
+  Blocks, Bot, Calculator, Smartphone, FlaskConical,
+  MessageSquare, Search, CreditCard, Cpu, Hammer,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -18,6 +20,16 @@ const iconMap: Record<string, React.ReactNode> = {
   Globe: <Globe className="h-6 w-6" />,
   Monitor: <Monitor className="h-6 w-6" />,
   Shield: <Shield className="h-6 w-6" />,
+  Blocks: <Blocks className="h-6 w-6" />,
+  Bot: <Bot className="h-6 w-6" />,
+  Calculator: <Calculator className="h-6 w-6" />,
+  Smartphone: <Smartphone className="h-6 w-6" />,
+  FlaskConical: <FlaskConical className="h-6 w-6" />,
+  MessageSquare: <MessageSquare className="h-6 w-6" />,
+  Search: <Search className="h-6 w-6" />,
+  CreditCard: <CreditCard className="h-6 w-6" />,
+  Cpu: <Cpu className="h-6 w-6" />,
+  Package: <Container className="h-6 w-6" />,
 };
 
 export default function CategoryCard({ category }: { category: CategoryInfo }) {

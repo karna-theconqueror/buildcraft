@@ -1,9 +1,11 @@
 "use client";
 
-import Editor from "@monaco-editor/react";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { Play, RotateCcw, CheckCircle2, XCircle } from "lucide-react";
 import { Test } from "@/types";
+
+const Editor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
 interface CodeEditorProps {
   initialCode: string;
