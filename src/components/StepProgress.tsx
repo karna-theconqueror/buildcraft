@@ -3,6 +3,8 @@
 import { CheckCircle2, Circle } from "lucide-react";
 import { useProgressStore } from "@/store/progress";
 
+const EMPTY: number[] = [];
+
 interface StepProgressProps {
   tutorialSlug: string;
   steps: { title: string }[];
@@ -16,7 +18,7 @@ export default function StepProgress({
   currentStep,
   onStepClick,
 }: StepProgressProps) {
-  const completedSteps = useProgressStore((s) => s.completedSteps[tutorialSlug] || []);
+  const completedSteps = useProgressStore((s) => s.completedSteps[tutorialSlug] ?? EMPTY);
 
   return (
     <div className="space-y-1">
