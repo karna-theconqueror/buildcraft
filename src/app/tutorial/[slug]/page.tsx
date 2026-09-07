@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { getDifficultyColor } from "@/lib/utils";
 import Certificate from "@/components/Certificate";
+import Confetti from "@/components/Confetti";
 
 export default function TutorialPage() {
   const params = useParams();
@@ -27,6 +28,7 @@ export default function TutorialPage() {
   const tutorial = getTutorialBySlug(slug);
   const [currentStep, setCurrentStep] = useState(0);
   const [showContent, setShowContent] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const {
     startTutorial,
@@ -71,6 +73,8 @@ export default function TutorialPage() {
   const handleCodeComplete = () => {
     if (allStepsCompleted) {
       completeTutorial(tutorial.slug);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3500);
     }
   };
 
@@ -80,6 +84,7 @@ export default function TutorialPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <Confetti active={showConfetti} />
       {/* Breadcrumb */}
       <div className="mb-6 flex items-center gap-2 text-sm text-gray-400">
         <Link href="/" className="hover:text-white transition-colors">

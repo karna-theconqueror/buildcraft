@@ -31,9 +31,8 @@ export default function Footer() {
             <h3 className="mb-4 text-sm font-semibold text-white">Learning</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link href="/paths" className="hover:text-white transition-colors">Learning Paths</Link></li>
-              <li><Link href="/?difficulty=beginner" className="hover:text-white transition-colors">Beginner</Link></li>
-              <li><Link href="/?difficulty=intermediate" className="hover:text-white transition-colors">Intermediate</Link></li>
-              <li><Link href="/?difficulty=advanced" className="hover:text-white transition-colors">Advanced</Link></li>
+              <li><Link href="/languages" className="hover:text-white transition-colors">Languages</Link></li>
+              <li><Link href="/category/security" className="hover:text-white transition-colors">Security</Link></li>
             </ul>
           </div>
 
@@ -41,18 +40,8 @@ export default function Footer() {
             <h3 className="mb-4 text-sm font-semibold text-white">Community</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <a href="https://github.com/karna-theconqueror/buildcraft" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
                   GitHub
-                </a>
-              </li>
-              <li>
-                <a href="https://discord.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  Twitter
                 </a>
               </li>
             </ul>

@@ -12,6 +12,7 @@ interface ProgressStore {
   completeTutorial: (slug: string) => void;
   completeStep: (tutorialSlug: string, stepIndex: number) => void;
   toggleBookmark: (slug: string) => void;
+  resetProgress: () => void;
   getProgress: () => { completed: number; total: number; percentage: number };
 }
 
@@ -57,6 +58,14 @@ export const useProgressStore = create<ProgressStore>()(
             ? state.bookmarkedTutorials.filter((s) => s !== slug)
             : [...state.bookmarkedTutorials, slug],
         })),
+
+      resetProgress: () =>
+        set({
+          completedTutorials: [],
+          startedTutorials: [],
+          currentTutorial: null,
+          completedSteps: {},
+        }),
 
       getProgress: () => {
         const state = get();

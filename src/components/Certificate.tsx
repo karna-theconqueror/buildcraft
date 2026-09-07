@@ -7,6 +7,13 @@ export default function Certificate({ tutorialSlug, title }: { tutorialSlug: str
   const completedTutorials = useProgressStore((s) => s.completedTutorials);
   const isCompleted = completedTutorials.includes(tutorialSlug);
 
+  // Escape HTML to prevent XSS
+  const escapeHtml = (str: string) => str.replace(/[&<>"']/g, (c) => {
+    const map: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    return map[c] || c;
+  });
+  const safeTitle = escapeHtml(title);
+
   if (!isCompleted) return null;
 
   const date = new Date().toLocaleDateString("en-US", {
@@ -36,7 +43,7 @@ export default function Certificate({ tutorialSlug, title }: { tutorialSlug: str
           <h1>Certificate of Completion</h1>
           <h2>BuildCraft</h2>
           <p>This certifies that you have successfully completed</p>
-          <p class="name">${title}</p>
+          <p class="name">${safeTitle}</p>
           <p>on ${date}</p>
           <p class="date">BuildCraft - Master Programming by Building</p>
         </div>
@@ -53,13 +60,16 @@ export default function Certificate({ tutorialSlug, title }: { tutorialSlug: str
     URL.revokeObjectURL(url);
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const text = `I just completed "${title}" on BuildCraft! 🔨`;
-    if (navigator.share) {
-      navigator.share({ title: "BuildCraft Certificate", text });
-    } else {
-      navigator.clipboard.writeText(text);
-      alert("Copied to clipboard!");
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "BuildCraft Certificate", text });
+      } else {
+        await navigator.clipboard.writeText(text);
+      }
+    } catch {
+      // Silently handle share/clipboard errors
     }
   };
 

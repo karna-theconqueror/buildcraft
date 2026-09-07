@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { categories } from "@/data/categories";
 import { tutorials, searchTutorials, getTutorialBySlug } from "@/data/tutorials";
 import { learningPaths } from "@/data/paths";
+import { useMemo } from "react";
 import CategoryCard from "@/components/CategoryCard";
 import TutorialCard from "@/components/TutorialCard";
 import ProgressBar from "@/components/ProgressBar";
@@ -24,7 +25,15 @@ function HomePage() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search");
   const currentTutorial = useProgressStore((s) => s.currentTutorial);
+  const resetProgress = useProgressStore((s) => s.resetProgress);
+  const progress = useProgressStore((s) => s.getProgress());
   const continueTutorial = currentTutorial ? getTutorialBySlug(currentTutorial) : null;
+
+  const uniqueLanguages = useMemo(() => {
+    const langs = new Set<string>();
+    tutorials.forEach((t) => t.languages.forEach((l) => langs.add(l)));
+    return langs.size;
+  }, []);
 
   if (searchQuery) {
     const results = searchTutorials(searchQuery);
@@ -68,7 +77,7 @@ function HomePage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/karna-theconqueror/buildcraft"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-6 py-3 font-medium text-white hover:bg-white/10 transition-colors"
@@ -81,6 +90,20 @@ function HomePage() {
       {/* Progress Section */}
       <section className="mb-16">
         <ProgressBar />
+        {progress.completed > 0 && (
+          <div className="mt-2 text-right">
+            <button
+              onClick={() => {
+                if (window.confirm("Reset all progress? This cannot be undone.")) {
+                  resetProgress();
+                }
+              }}
+              className="text-xs text-gray-500 hover:text-red-400 transition-colors"
+            >
+              Reset progress
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Continue Learning */}
@@ -123,7 +146,7 @@ function HomePage() {
         </div>
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 text-center">
           <Sparkles className="mx-auto mb-2 h-8 w-8 text-purple-500" />
-          <div className="text-3xl font-bold">10+</div>
+          <div className="text-3xl font-bold">{uniqueLanguages}+</div>
           <div className="text-sm text-gray-400">Languages</div>
         </div>
       </section>

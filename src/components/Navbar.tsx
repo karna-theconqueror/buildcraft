@@ -23,7 +23,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
           <Hammer className="h-6 w-6 text-orange-500" />
@@ -87,7 +87,7 @@ export default function Navbar() {
         </div>
       </div>
       {mobileSearchOpen && (
-        <div className="border-t border-white/10 bg-black/80 p-4 md:hidden">
+        <div className="border-t border-white/10 bg-white/80 dark:bg-black/80 p-4 md:hidden">
           <form onSubmit={handleSearch}>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />

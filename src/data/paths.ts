@@ -64,10 +64,10 @@ export const learningPaths: LearningPath[] = [
     icon: "Gamepad2",
     color: "from-yellow-500 to-orange-500",
     tutorials: [
-      "build-your-own-3d-renderer",
+      "build-your-own-3d-engine",
       "build-your-own-physics-engine",
       "build-your-own-game-engine",
-      "build-your-own-game",
+      "build-your-own-compiler",
       "build-your-own-ray-tracer",
     ],
   },
@@ -75,7 +75,7 @@ export const learningPaths: LearningPath[] = [
     slug: "devops-engineer",
     name: "DevOps Engineer",
     description: "Master infrastructure, containers, and deployment pipelines",
-    icon: "Container",
+    icon: "Package",
     color: "from-teal-500 to-blue-500",
     tutorials: [
       "build-your-own-docker",

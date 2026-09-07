@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { CategoryInfo } from "@/types";
 import {
-  Brain, Server, Database, Container, Layout,
+  Brain, Server, Database, Package, Layout,
   Gamepad2, Code2, Globe, Monitor, Shield,
   Blocks, Bot, Calculator, Smartphone, FlaskConical,
   MessageSquare, Search, CreditCard, Cpu, Hammer,
@@ -13,7 +13,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Brain: <Brain className="h-6 w-6" />,
   Server: <Server className="h-6 w-6" />,
   Database: <Database className="h-6 w-6" />,
-  Container: <Container className="h-6 w-6" />,
+  Package: <Package className="h-6 w-6" />,
   Layout: <Layout className="h-6 w-6" />,
   Gamepad2: <Gamepad2 className="h-6 w-6" />,
   Code2: <Code2 className="h-6 w-6" />,
@@ -29,7 +29,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Search: <Search className="h-6 w-6" />,
   CreditCard: <CreditCard className="h-6 w-6" />,
   Cpu: <Cpu className="h-6 w-6" />,
-  Package: <Container className="h-6 w-6" />,
+  Hammer: <Hammer className="h-6 w-6" />,
 };
 
 export default function CategoryCard({ category }: { category: CategoryInfo }) {
