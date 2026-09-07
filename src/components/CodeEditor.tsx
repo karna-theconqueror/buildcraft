@@ -48,15 +48,13 @@ export default function CodeEditor({
     await new Promise((r) => setTimeout(r, 800));
 
     const results = tests.map((test) => {
-      // Check if code contains the expected output string or solution keywords
       const codeLower = code.toLowerCase();
       const expected = test.expectedOutput.toLowerCase();
       const solutionLower = solutionCode.toLowerCase();
 
-      // Pass if code contains the expected output, or if it's close to the solution
+      // Pass if code contains the expected output or key solution fragments
       const passed = codeLower.includes(expected) || 
-                     codeLower.includes(solutionLower.slice(0, 20)) ||
-                     (code.length > 100 && code.includes("{") && code.includes("}"));
+                     codeLower.includes(solutionLower.slice(0, 30));
       return {
         name: test.name,
         passed,

@@ -10,6 +10,8 @@ export default function SearchModal() {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const routerRef = useRef(router);
+  routerRef.current = router;
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -35,7 +37,7 @@ export default function SearchModal() {
 
   const handleSelect = (slug: string) => {
     setOpen(false);
-    router.push(`/tutorial/${slug}`);
+    routerRef.current.push(`/tutorial/${slug}`);
   };
 
   if (!open) return null;

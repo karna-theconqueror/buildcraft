@@ -714,10 +714,6 @@ export function getTutorialsByCategory(category: string): Tutorial[] {
   return tutorials.filter((t) => t.category === category);
 }
 
-export function getTutorialsByDifficulty(difficulty: string): Tutorial[] {
-  return tutorials.filter((t) => t.difficulty === difficulty);
-}
-
 export function searchTutorials(query: string): Tutorial[] {
   const lower = query.toLowerCase();
   return tutorials.filter(

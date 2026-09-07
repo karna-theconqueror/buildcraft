@@ -26,14 +26,24 @@ function HomePage() {
   const searchQuery = searchParams.get("search");
   const currentTutorial = useProgressStore((s) => s.currentTutorial);
   const resetProgress = useProgressStore((s) => s.resetProgress);
-  const progress = useProgressStore((s) => s.getProgress());
+  const completedCount = useProgressStore((s) => s.completedTutorials.length);
   const continueTutorial = currentTutorial ? getTutorialBySlug(currentTutorial) : null;
+
+  const progress = useMemo(() => ({
+    completed: completedCount,
+    total: tutorials.length,
+    percentage: Math.round((completedCount / tutorials.length) * 100),
+  }), [completedCount]);
 
   const uniqueLanguages = useMemo(() => {
     const langs = new Set<string>();
     tutorials.forEach((t) => t.languages.forEach((l) => langs.add(l)));
     return langs.size;
   }, []);
+
+  const trendingTutorials = useMemo(() => [...tutorials]
+    .sort((a, b) => b.stars - a.stars)
+    .slice(0, 6), []);
 
   if (searchQuery) {
     const results = searchTutorials(searchQuery);
@@ -43,10 +53,6 @@ function HomePage() {
       </div>
     );
   }
-
-  const trendingTutorials = [...tutorials]
-    .sort((a, b) => b.stars - a.stars)
-    .slice(0, 6);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

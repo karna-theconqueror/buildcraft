@@ -13,7 +13,7 @@ import {
   Layers,
   Cpu,
   Gamepad2,
-  Container,
+  Package,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -22,7 +22,7 @@ const iconMap: Record<string, React.ReactNode> = {
   Layers: <Layers className="h-6 w-6" />,
   Cpu: <Cpu className="h-6 w-6" />,
   Gamepad2: <Gamepad2 className="h-6 w-6" />,
-  Container: <Container className="h-6 w-6" />,
+  Package: <Package className="h-6 w-6" />,
 };
 
 export default function PathsPage() {

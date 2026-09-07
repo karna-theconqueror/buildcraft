@@ -65,6 +65,7 @@ export const useProgressStore = create<ProgressStore>()(
           startedTutorials: [],
           currentTutorial: null,
           completedSteps: {},
+          bookmarkedTutorials: [],
         }),
 
       getProgress: () => {

@@ -30,13 +30,11 @@ export default function TutorialPage() {
   const [showContent, setShowContent] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
 
-  const {
-    startTutorial,
-    completeTutorial,
-    completeStep,
-    completedTutorials,
-    completedSteps,
-  } = useProgressStore();
+  const startTutorial = useProgressStore((s) => s.startTutorial);
+  const completeTutorial = useProgressStore((s) => s.completeTutorial);
+  const completeStep = useProgressStore((s) => s.completeStep);
+  const completedTutorials = useProgressStore((s) => s.completedTutorials);
+  const completedSteps = useProgressStore((s) => s.completedSteps);
 
   useEffect(() => {
     if (tutorial) {

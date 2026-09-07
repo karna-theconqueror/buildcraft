@@ -1,17 +1,3 @@
-import { clsx, type ClassValue } from "clsx";
-
-export function cn(...inputs: ClassValue[]) {
-  return clsx(inputs);
-}
-
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(date);
-}
-
 export function getDifficultyColor(difficulty: string): string {
   switch (difficulty) {
     case "beginner":
@@ -23,20 +9,4 @@ export function getDifficultyColor(difficulty: string): string {
     default:
       return "text-gray-500 bg-gray-500/10 border-gray-500/20";
   }
-}
-
-export function getCategoryIcon(category: string): string {
-  const icons: Record<string, string> = {
-    "ai-ml": "🧠",
-    backend: "⚙️",
-    database: "💾",
-    devops: "🐳",
-    frontend: "🎨",
-    game: "🎮",
-    language: "📝",
-    network: "🌐",
-    os: "💻",
-    security: "🔒",
-  };
-  return icons[category] || "📦";
 }

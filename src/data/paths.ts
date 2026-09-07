@@ -86,7 +86,3 @@ export const learningPaths: LearningPath[] = [
     ],
   },
 ];
-
-export function getLearningPathBySlug(slug: string): LearningPath | undefined {
-  return learningPaths.find((p) => p.slug === slug);
-}
